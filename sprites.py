@@ -7,10 +7,10 @@ class Player(pg.sprite.Sprite):
     def __init__(self):
         pg.sprite.Sprite.__init__(self)
         self.image = pg.Surface((30, 40))
-        self.image.fill(YELLOW)
+        self.image.fill(VERDE)
         self.rect = self.image.get_rect()
-        self.rect.center = (WIDTH / 2, HEIGHT / 2)
-        self.pos = vec(WIDTH / 2, HEIGHT / 2)
+        self.rect.center = (LARGURA / 2, ALTURA / 2)
+        self.pos = vec(LARGURA / 2, ALTURA / 2)
         self.vel = vec(0, 0)
         self.acc = vec(0, 0)
 
@@ -28,9 +28,9 @@ class Player(pg.sprite.Sprite):
         self.vel += self.acc
         self.pos += self.vel + 0.5 * self.acc
         # wrap around the sides of the screen
-        if self.pos.x > WIDTH:
+        if self.pos.x > LARGURA:
             self.pos.x = 0
         if self.pos.x < 0:
-            self.pos.x = WIDTH
+            self.pos.x = LARGURA
 
         self.rect.center = self.pos

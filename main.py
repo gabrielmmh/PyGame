@@ -1,32 +1,27 @@
-# KidsCanCode - Game Development with Pygame video series
-# Jumpy! (a platform game) - Part 2
-# Video link: https://www.youtube.com/watch?v=8LRI0RLKyt0
-# Player movement
-
 import pygame as pg
 import random
 from settings import *
 from sprites import *
 
-class Game:
+class Jogo:
     def __init__(self):
-        # initialize game window, etc
+        # Inicializa a janela do jogo
         pg.init()
         pg.mixer.init()
-        self.screen = pg.display.set_mode((WIDTH, HEIGHT))
+        self.screen = pg.display.set_mode((LARGURA, ALTURA))
         pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
         self.running = True
 
     def new(self):
-        # start a new game
+        # Coomeça um novo jogo
         self.all_sprites = pg.sprite.Group()
         self.player = Player()
         self.all_sprites.add(self.player)
         self.run()
 
     def run(self):
-        # Game Loop
+        # Loop do jogo
         self.playing = True
         while self.playing:
             self.clock.tick(FPS)
@@ -35,34 +30,34 @@ class Game:
             self.draw()
 
     def update(self):
-        # Game Loop - Update
+        # Loop do jogo - Update
         self.all_sprites.update()
 
     def events(self):
-        # Game Loop - events
+        # Loop do jogo - eventos
         for event in pg.event.get():
-            # check for closing window
+            # checar se está fechando a janela
             if event.type == pg.QUIT:
                 if self.playing:
                     self.playing = False
                 self.running = False
 
     def draw(self):
-        # Game Loop - draw
-        self.screen.fill(BLACK)
+        # Loop do jogo - desenho
+        self.screen.fill(PRETO)
         self.all_sprites.draw(self.screen)
-        # *after* drawing everything, flip the display
+        # Depois de desenhar tudo, rodar o display
         pg.display.flip()
 
     def show_start_screen(self):
-        # game splash/start screen
+        # tela de inicio
         pass
 
     def show_go_screen(self):
-        # game over/continue
+        # tela final
         pass
 
-g = Game()
+g = Jogo()
 g.show_start_screen()
 while g.running:
     g.new()

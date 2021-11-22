@@ -1,7 +1,7 @@
 # Configurações do Jogo
-TITLE = "Jumpy!"
-WIDTH = 480
-HEIGHT = 600
+TITLE = "Mustache Froggy!"
+LARGURA = 480
+ALTURA = 600
 FPS = 60
 
 
@@ -10,9 +10,9 @@ PLAYER_ACC = 0.5
 PLAYER_FRICTION = -0.12
 
 # Definindo cores
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-BLUE = (0, 0, 255)
-YELLOW = (255, 255, 0)
+BRANCO = (255, 255, 255)
+PRETO = (0, 0, 0)
+VERMELHO = (255, 0, 0)
+VERDE = (0, 255, 0)
+AZUL = (0, 0, 255)
+AMARELO = (255, 255, 0)
