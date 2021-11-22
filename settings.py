@@ -1,12 +1,18 @@
-# Opções de jogo 
-TITLE = "Meu jogo"
-LARGURA = 360
-ALTURA = 480
-FPS = 30
+# Configurações do Jogo
+TITLE = "Jumpy!"
+WIDTH = 480
+HEIGHT = 600
+FPS = 60
 
-# Definindo as cores
-branco = (255, 255, 255)
-preto = (0, 0, 0)
-vermelho = (255, 0, 0)
-verde = (0, 255, 0)
-azul = (0, 0, 255)
+
+# Propriedades do player
+PLAYER_ACC = 0.5
+PLAYER_FRICTION = -0.12
+
+# Definindo cores
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+BLUE = (0, 0, 255)
+YELLOW = (255, 255, 0)
