@@ -14,10 +14,17 @@ class Jogo:
         self.running = True
 
     def new(self):
+        plat = Platform(0,ALTURA - 40 , LARGURA , 40)
+        plat2 = Platform(20,ALTURA - 300  , 100 , 40)
         # Coomeça um novo jogo
         self.all_sprites = pg.sprite.Group()
+        self.plataformas = pg.sprite.Group()
         self.player = Player()
         self.all_sprites.add(self.player)
+        for p in LISTA_PLATS:
+            p = Platform(*p)
+            self.all_sprites.add(p)
+            self.plataformas.add(p)
         self.run()
 
     def run(self):
@@ -32,6 +39,12 @@ class Jogo:
     def update(self):
         # Loop do jogo - Update
         self.all_sprites.update()
+        if self.player.vel.y > 0:
+            colisao = pg.sprite.spritecollide(self.player,self.plataformas,False)
+            if colisao:
+                self.player.pos.y = colisao[0].rect.top
+                self.player.vel.y = 0
+                self.player.vel.y = -15
 
     def events(self):
         # Loop do jogo - eventos

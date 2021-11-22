@@ -8,6 +8,11 @@ FPS = 60
 # Propriedades do player
 PLAYER_ACC = 0.5
 PLAYER_FRICTION = -0.12
+LISTA_PLATS=[(0,ALTURA - 40 , LARGURA , 40),
+(20,ALTURA - 170  , 100 , 20),
+(120,ALTURA - 300 , 50 , 20),
+(400,ALTURA - 400 , 40 , 20),
+(10,ALTURA - 520 , 20 , 20)]
 
 # Definindo cores
 BRANCO = (255, 255, 255)
