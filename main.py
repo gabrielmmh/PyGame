@@ -12,11 +12,13 @@ class Jogo:
         pg.display.set_caption(TITLE)
         self.clock = pg.time.Clock()
         self.running = True
+        self.font_name = pg.font.match_font(FONT_NAME)
 
     def new(self):
         plat = Platform(0,ALTURA - 40 , LARGURA , 40)
         plat2 = Platform(20,ALTURA - 300  , 100 , 40)
         # Coomeça um novo jogo
+        self.score = 0
         self.all_sprites = pg.sprite.Group()
         self.plataformas = pg.sprite.Group()
         self.player = Player()
@@ -52,6 +54,17 @@ class Jogo:
                 plat.rect.y += abs(self.player.vel.y)
                 if plat.rect.top >= ALTURA:
                     plat.kill()
+                    self.score += 10
+        
+        #player morre
+        if self.player.rect.bottom > ALTURA:
+            for sprite in self.all_sprites:
+                sprite.rect.y -= max(self.player.vel.y, 10)
+                if sprite.rect.bottom < 0:
+                    sprite.kill()
+        if len(self.plataformas) == 0:
+            self.playing = False
+
         #Criando plataformas novas
         while len(self.plataformas) < 6:
             largura = random.randrange(50, 100)
@@ -59,7 +72,8 @@ class Jogo:
                         random.randrange(-75, -30),
                          largura, 20)
             self.plataformas.add(p)
-            self.all_sprites.add(p)            
+            self.all_sprites.add(p)
+
 
     def events(self):
         # Loop do jogo - eventos
@@ -74,6 +88,7 @@ class Jogo:
         # Loop do jogo - desenho
         self.screen.fill(PRETO)
         self.all_sprites.draw(self.screen)
+        self.draw_text(str(self.score), 40, BRANCO, LARGURA/2, 15)
         # Depois de desenhar tudo, rodar o display
         pg.display.flip()
 
@@ -84,6 +99,13 @@ class Jogo:
     def show_go_screen(self):
         # tela final
         pass
+
+    def draw_text(self, text, size, color, x, y):
+        font = pg.font.Font(self.font_name, size)
+        text_surface = font.render(text, True, color)
+        text_rect = text_surface.get_rect()
+        text_rect.midtop = (x, y)
+        self.screen.blit(text_surface, text_rect)
 
 g = Jogo()
 g.show_start_screen()
