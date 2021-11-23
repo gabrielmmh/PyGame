@@ -45,6 +45,21 @@ class Jogo:
                 self.player.pos.y = colisao[0].rect.top
                 self.player.vel.y = 0
                 self.player.vel.y = -15
+        #Subir tela
+        if self.player.rect.top <=  ALTURA/4:
+            self.player.pos.y += abs(self.player.vel.y)
+            for plat in self.plataformas:
+                plat.rect.y += abs(self.player.vel.y)
+                if plat.rect.top >= ALTURA:
+                    plat.kill()
+        #Criando plataformas novas
+        while len(self.plataformas) < 6:
+            largura = random.randrange(50, 100)
+            p = Platform(random.randrange(0, LARGURA-largura),
+                        random.randrange(-75, -30),
+                         largura, 20)
+            self.plataformas.add(p)
+            self.all_sprites.add(p)            
 
     def events(self):
         # Loop do jogo - eventos
