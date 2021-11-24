@@ -41,8 +41,10 @@ class Jogo:
     def update(self):
         # Loop do jogo - Update
         self.all_sprites.update()
+        # Quando estiver subindo o player 'n enconsta' na plataforma
         if self.player.vel.y > 0:
             colisao = pg.sprite.spritecollide(self.player,self.plataformas,False)
+            #colisao na plataforma e  pulo automatico
             if colisao:
                 self.player.pos.y = colisao[0].rect.top
                 self.player.vel.y = 0

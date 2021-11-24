@@ -5,6 +5,7 @@ vec = pg.math.Vector2
 
 class Player(pg.sprite.Sprite):
     def __init__(self):
+        #personagem
         pg.sprite.Sprite.__init__(self)
         self.image = pg.Surface((30, 40))
         self.image.fill(VERDE)
@@ -15,6 +16,7 @@ class Player(pg.sprite.Sprite):
         self.acc = vec(0, 0)
 
     def update(self):
+        #movimentacao com setas do teclado
         self.acc = vec(0, 0.5)
         keys = pg.key.get_pressed()
         if keys[pg.K_LEFT]:
@@ -22,12 +24,12 @@ class Player(pg.sprite.Sprite):
         if keys[pg.K_RIGHT]:
             self.vel.x = 7
 
-        # apply friction
-        self.acc.x += self.vel.x * PLAYER_FRICTION
-        # equations of motion
+        # Desaceleracao e Movimentacao
+        self.acc.x += self.vel.x * DESACELERACAO
+        
         self.vel += self.acc
         self.pos += self.vel + 0.5 * self.acc
-        # wrap around the sides of the screen
+        # Permite a movimentacao nos lados da tela 
         if self.pos.x > LARGURA:
             self.pos.x = 0
         if self.pos.x < 0:
@@ -37,6 +39,7 @@ class Player(pg.sprite.Sprite):
 
 class Platform(pg.sprite.Sprite):
     def __init__( self,x,y,l,h ):
+        #Plataformas
         pg.sprite.Sprite.__init__(self)
         self.image = pg.Surface((l,h))
         self.image.fill(AMARELO)

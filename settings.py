@@ -7,8 +7,7 @@ FONT_NAME = 'Comic Sans'
 
 
 # Propriedades do player
-PLAYER_ACC = 0.5
-PLAYER_FRICTION = -0.12
+DESACELERACAO = -0.12
 LISTA_PLATS=[(0,ALTURA - 40 , LARGURA , 40),
 (20,ALTURA - 170  , 100 , 20),
 (120,ALTURA - 300 , 50 , 20),
