@@ -3,7 +3,7 @@ TITLE = "Mustache Froggy!"
 LARGURA = 480
 ALTURA = 600
 FPS = 60
-FONT_NAME = 'comic sans'
+FONT_NAME = 'Comic Sans'
 
 
 # Propriedades do player
