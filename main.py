@@ -88,7 +88,7 @@ class Jogo:
 
     def draw(self):
         # Loop do jogo - desenho
-        self.screen.fill(PRETO)
+        self.screen.fill(AZULCLARO)
         self.all_sprites.draw(self.screen)
         self.draw_text(str(self.score), 40, BRANCO, LARGURA/2, 15)
         # Depois de desenhar tudo, rodar o display
@@ -96,11 +96,39 @@ class Jogo:
 
     def show_start_screen(self):
         # tela de inicio
+        self.screen.fill(AZULCLARO)
+        self.draw_text(TITLE,50,PRETO,LARGURA/2,ALTURA/4)
+        self.draw_text('Feito para o Betinho ',22,PRETO,LARGURA /2, ALTURA/2 )
+        self.draw_text('Clique em qualquer tecla para comecar',22,PRETO,LARGURA /2, ALTURA/2 + 30 )
+        pg.display.flip()
+        self.esperando_clique()
         pass
 
     def show_go_screen(self):
         # tela final
+        if not self.running:
+            return # Fecha o app se estiver no meio do jogo
+        self.screen.fill(PRETO)
+        self.draw_text('BETINHO PQ ES TAO RUIM?',30,BRANCO,LARGURA/2,ALTURA/4)
+        self.draw_text('Score: '+ str(self.score),22,BRANCO,LARGURA /2, ALTURA/2 )
+        self.draw_text('Clique em qualquer tecla para jogar novamente',22,BRANCO,LARGURA /2, ALTURA/2 + 30 )
+        pg.display.flip()
+        self.esperando_clique()
         pass
+
+    # Saindo da tela inicial ou final
+    def esperando_clique(self):
+         esperando = True
+         while esperando:
+             # Manter a tela enquanto esperand = True
+             self.clock.tick(FPS)
+             for evento in pg.event.get():
+                 # Click
+                 if evento.type == pg.QUIT:
+                     esperando = False
+                     self.running = False
+                 if evento.type == pg.KEYUP:
+                    esperando = False
 
     def draw_text(self, text, size, color, x, y):
         font = pg.font.Font(self.font_name, size)

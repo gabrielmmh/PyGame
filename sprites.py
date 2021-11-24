@@ -42,7 +42,7 @@ class Platform(pg.sprite.Sprite):
         #Plataformas
         pg.sprite.Sprite.__init__(self)
         self.image = pg.Surface((l,h))
-        self.image.fill(AMARELO)
+        self.image.fill(BRANCO)
         self.rect = self.image.get_rect()
         self.rect.x=x
         self.rect.y=y
