@@ -21,8 +21,10 @@ class Jogo:
         self.score = 0
         self.all_sprites = pg.sprite.Group()
         self.plataformas = pg.sprite.Group()
+        #Cria o player
         self.player = Player()
         self.all_sprites.add(self.player)
+        #Cria as plataformas
         for p in LISTA_PLATS:
             p = Platform(*p)
             self.all_sprites.add(p)
@@ -41,7 +43,7 @@ class Jogo:
     def update(self):
         # Loop do jogo - Update
         self.all_sprites.update()
-        # Quando estiver subindo o player 'n enconsta' na plataforma
+        # Quando estiver subindo o player 'n encosta' na plataforma
         if self.player.vel.y > 0:
             colisao = pg.sprite.spritecollide(self.player,self.plataformas,False)
             #colisao na plataforma e  pulo automatico
