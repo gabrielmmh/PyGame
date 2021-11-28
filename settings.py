@@ -4,6 +4,7 @@ LARGURA = 480
 ALTURA = 600
 FPS = 60
 FONT_NAME = 'Comic Sans'
+MAIOR_PONT = 'maior_pont.txt'
 
 
 # Propriedades do player

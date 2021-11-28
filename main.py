@@ -2,6 +2,7 @@ import pygame as pg
 import random
 from settings import *
 from sprites import *
+from os import path
 
 class Jogo:
     def __init__(self):
@@ -13,6 +14,16 @@ class Jogo:
         self.clock = pg.time.Clock()
         self.running = True
         self.font_name = pg.font.match_font(FONT_NAME)
+        self.load_data() 
+    
+    def load_data(self):
+        # insere a maior pontuação
+        self.dir = path.dirname(__file__)
+        with open(path.join(self.dir, MAIOR_PONT), 'w') as f:
+            try:
+                self.maior_pont = int(f.read())
+            except:
+                self.maior_pont = 0
 
     def new(self):
         plat = Platform(0,ALTURA - 40 , LARGURA , 40)
@@ -60,7 +71,7 @@ class Jogo:
                     plat.kill()
                     self.score += 10
         
-        #player morre
+        #Player morre
         if self.player.rect.bottom > ALTURA:
             for sprite in self.all_sprites:
                 sprite.rect.y -= max(self.player.vel.y, 10)
@@ -99,9 +110,11 @@ class Jogo:
     def show_start_screen(self):
         # tela de inicio
         self.screen.fill(AZULCLARO)
-        self.draw_text(TITLE,50,PRETO,LARGURA/2,ALTURA/4)
-        self.draw_text('Feito para o Betinho ',22,PRETO,LARGURA /2, ALTURA/2 )
-        self.draw_text('Clique em qualquer tecla para comecar',22,PRETO,LARGURA /2, ALTURA/2 + 30 )
+        self.draw_text(TITLE, 50, PRETO, LARGURA/2, ALTURA/4)
+        self.draw_text('Feito para o Betinho',18, PRETO, LARGURA/2, ALTURA * 3/4)
+        self.draw_text('Use as setas para se mover!', 22, PRETO, LARGURA/2, ALTURA/2)
+        self.draw_text('Clique em qualquer tecla para começar', 22, PRETO, LARGURA/2, ALTURA/2 + 30)
+        self.draw_text('Maior Pontuação: ' + str(self.maior_pont), 22, PRETO, LARGURA/2, 15)
         pg.display.flip()
         self.esperando_clique()
         pass
@@ -111,9 +124,19 @@ class Jogo:
         if not self.running:
             return # Fecha o app se estiver no meio do jogo
         self.screen.fill(PRETO)
-        self.draw_text('BETINHO PQ ES TAO RUIM?',30,BRANCO,LARGURA/2,ALTURA/4)
-        self.draw_text('Score: '+ str(self.score),22,BRANCO,LARGURA /2, ALTURA/2 )
-        self.draw_text('Clique em qualquer tecla para jogar novamente',22,BRANCO,LARGURA /2, ALTURA/2 + 30 )
+        self.draw_text('Você matou o sapo!', 30, BRANCO, LARGURA/2, ALTURA/4)
+        self.draw_text('Pontuação: '+ str(self.score), 22, BRANCO, LARGURA/2, ALTURA/2)
+        self.draw_text('Clique em qualquer tecla para jogar novamente', 22, BRANCO, LARGURA/2, ALTURA * 4/5)
+        if self.score > self.maior_pont:
+            self.maior_pont = self.score
+            self.draw_text('NOVO RECORDE!', 22, BRANCO, LARGURA/2, ALTURA/2 + 50)
+            #abrir as f, para ser mais pratico para escrever (as file)
+            with open(path.join(self.dir, MAIOR_PONT), 'w') as f: 
+                f.write(str(self.score))
+        
+        else:
+            self.draw_text('Maior Pontuação: ' + str(self.maior_pont), 22, PRETO, LARGURA/2, ALTURA/2 + 40)
+
         pg.display.flip()
         self.esperando_clique()
         pass
