@@ -4,6 +4,8 @@ from settings import *
 from sprites import *
 from os import path
 
+img_dir = path.join(path.dirname(__file__), 'img')
+
 class Jogo:
     def __init__(self):
         # Inicializa a janela do jogo
@@ -29,6 +31,8 @@ class Jogo:
         plat = Platform(0,ALTURA - 40 , LARGURA , 40)
         plat2 = Platform(20,ALTURA - 300  , 100 , 40)
         # Coomeça um novo jogo
+        self.fundo = pg.image.load(path.join(img_dir, 'fundo.png')).convert()
+        self.fundo_ret = self.fundo.get_rect()
         self.score = 0
         self.all_sprites = pg.sprite.Group()
         self.plataformas = pg.sprite.Group()
@@ -102,6 +106,7 @@ class Jogo:
     def draw(self):
         # Loop do jogo - desenho
         self.screen.fill(AZULCLARO)
+        self.screen.blit(self.fundo, self.fundo_ret)
         self.all_sprites.draw(self.screen)
         self.draw_text(str(self.score), 40, BRANCO, LARGURA/2, 15)
         # Depois de desenhar tudo, rodar o display
@@ -150,8 +155,8 @@ class Jogo:
              for evento in pg.event.get():
                  # Click
                  if evento.type == pg.QUIT:
-                     esperando = False
-                     self.running = False
+                    esperando = False
+                    self.running = False
                  if evento.type == pg.KEYUP:
                     esperando = False
 
