@@ -86,14 +86,14 @@ class Player(pg.sprite.Sprite):
                 self.rect = self.image.get_rect()
                 self.rect.bottom = bottom
         if self.status == 'air':
-            if now - self.last_update > 100:
-                self.last_update = now
-                self.image = self.air[0]
-                # alinhando imagem e personagem // Fisica Melhor
-                bottom = self.rect.bottom
-                self.image = self.standing_frame[self.current_frame]
-                self.rect = self.image.get_rect()
-                self.rect.bottom = bottom
+            
+            self.last_update = now
+            self.image = self.air[0]
+            # alinhando imagem e personagem // Fisica Melhor
+            bottom = self.rect.bottom
+            self.image = self.standing_frame[self.current_frame]
+            self.rect = self.image.get_rect()
+            self.rect.bottom = bottom
 
         
     
@@ -101,9 +101,14 @@ class Player(pg.sprite.Sprite):
 class Platform(pg.sprite.Sprite):
     def __init__( self,x,y,l,h ):
         #Plataformas
+        img_dir = path.join(path.dirname(__file__),'img')
+        # Carregando as imagens
+        palt = pg.image.load(path.join(img_dir,"Nuvem.png")).convert()
         pg.sprite.Sprite.__init__(self)
-        self.image = pg.Surface((l,h))
-        self.image.fill(BRANCO)
+        
+        self.image = palt
+        self.image = pg.transform.scale(palt,(l, h*1.7))
+        self.image.set_colorkey(PRETO)
         self.rect = self.image.get_rect()
         self.rect.x=x
         self.rect.y=y
