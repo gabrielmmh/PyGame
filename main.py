@@ -115,11 +115,20 @@ class Jogo:
     def show_start_screen(self):
         # tela de inicio
         self.screen.fill(AZULCLARO)
-        self.draw_text(TITLE, 50, PRETO, LARGURA/2, ALTURA/4)
-        self.draw_text('Feito para o Betinho',18, PRETO, LARGURA/2, ALTURA * 3/4)
-        self.draw_text('Use as setas para se mover!', 22, PRETO, LARGURA/2, ALTURA/2)
-        self.draw_text('Clique em qualquer tecla para começar', 22, PRETO, LARGURA/2, ALTURA/2 + 30)
-        self.draw_text('Maior Pontuação: ' + str(self.maior_pont), 22, PRETO, LARGURA/2, 15)
+        self.fundo1 = pg.image.load(path.join(img_dir, 'fundo_inicio1.png')).convert()
+        self.fundo1_ret = self.fundo1.get_rect()
+        self.fundo2 = pg.image.load(path.join(img_dir, 'fundo_inicio2.png')).convert()
+        self.fundo2_ret = self.fundo2.get_rect()
+        self.fundo3 = pg.image.load(path.join(img_dir, 'fundo_inicio3.png')).convert()
+        self.fundo3_ret = self.fundo3.get_rect()
+        self.fundo4 = pg.image.load(path.join(img_dir, 'fundo_inicio4.png')).convert()
+        self.fundo4_ret = self.fundo4.get_rect()
+        self.tela_inicio1 = [self.fundo1, self.fundo2, self.fundo3, self.fundo4]
+        self.tela_inicio2 = [self.fundo1_ret, self.fundo2_ret, self.fundo3_ret, self.fundo4_ret]
+        '''i=1
+        while i <= len(self.tela_inicio1):
+            self.screen.blit(self.tela_inicio1[i], self.tela_inicio2[i]) '''  
+        self.screen.blit(self.fundo1, self.fundo1_ret)     
         pg.display.flip()
         self.esperando_clique()
         pass
