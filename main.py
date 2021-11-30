@@ -28,7 +28,7 @@ class Jogo:
                 self.maior_pont = 0
 
     def new(self):
-        plat = Platform(0,ALTURA - 40 , LARGURA , 40)
+        plat = Platform(0,ALTURA - 40 , LARGURA , 100)
         plat2 = Platform(20,ALTURA - 300  , 100 , 40)
         # Coomeça um novo jogo
         self.fundo = pg.image.load(path.join(img_dir, 'fundo.png')).convert()
