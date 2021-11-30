@@ -3,6 +3,7 @@ import random
 from settings import *
 from sprites import *
 from os import path
+from pygame import mixer 
 
 img_dir = path.join(path.dirname(__file__), 'img')
 
@@ -18,6 +19,8 @@ class Jogo:
         self.font_name = pg.font.match_font(FONT_NAME)
         self.load_data() 
     
+
+
     def load_data(self):
         # insere a maior pontuação
         self.dir = path.dirname(__file__)
@@ -44,6 +47,8 @@ class Jogo:
             p = Platform(*p)
             self.all_sprites.add(p)
             self.plataformas.add(p)
+        pg.mixer.music.load('bitsong.wav')
+        pg.mixer.music.play(-1)
         self.run()
 
     def run(self):
@@ -181,5 +186,6 @@ g.show_start_screen()
 while g.running:
     g.new()
     g.show_go_screen()
+
 
 pg.quit()
