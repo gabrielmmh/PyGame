@@ -15,8 +15,8 @@ class Player(pg.sprite.Sprite):
         # Carregando as imagens
         froggy1 = pg.image.load(path.join(img_dir,"Froggy1.png")).convert()
         pg.sprite.Sprite.__init__(self)
-        self.image = froggy1
-
+        self.image = pg.transform.scale(froggy1, (100, 110))
+        self.image.set_colorkey(PRETO)
         self.rect = self.image.get_rect()
         self.rect.center = (LARGURA / 2, ALTURA / 2)
         self.pos = vec(LARGURA / 2, ALTURA / 2)
