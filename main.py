@@ -155,7 +155,7 @@ class Jogo:
                 f.write(str(self.score))
         
         else:
-            self.draw_text('Maior Pontuação: ' + str(self.maior_pont), 22, PRETO, LARGURA/2, ALTURA/2 + 40)
+            self.draw_text('Maior Pontuação: ' + str(self.maior_pont), 22, BRANCO, LARGURA/2, ALTURA/2 + 40)
 
         pg.display.flip()
         self.esperando_clique()
