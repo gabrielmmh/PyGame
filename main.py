@@ -149,6 +149,7 @@ class Jogo:
         self.draw_text('Você matou o sapo!', 30, BRANCO, LARGURA/2, ALTURA/4)
         self.draw_text('Pontuação: '+ str(self.score), 22, BRANCO, LARGURA/2, ALTURA/2)
         self.draw_text('Clique em qualquer tecla para jogar novamente', 22, BRANCO, LARGURA/2, ALTURA * 4/5)
+        self.draw_text('Por Pedro Civita, Lucas Tachdjian e Gabriel Hermida', 22, BRANCO, LARGURA/2, ALTURA * 4/5 + 80)
         if self.score > self.maior_pont:
             self.maior_pont = self.score
             self.draw_text('NOVO RECORDE!', 22, BRANCO, LARGURA/2, ALTURA/2 + 50)
