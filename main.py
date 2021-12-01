@@ -9,7 +9,7 @@ img_dir = path.join(path.dirname(__file__), 'img')
 
 class Jogo:
     def __init__(self):
-        # Inicializa a janela do jogo-----------------------------------
+        # Inicializa a janela do jogo
         pg.init()
         pg.mixer.init()
         self.screen = pg.display.set_mode((LARGURA, ALTURA))
@@ -22,7 +22,7 @@ class Jogo:
 
 
     def load_data(self):
-        # insere a maior pontuação---------------------------------------
+        # insere a maior pontuação
         self.dir = path.dirname(__file__)
         with open(path.join(self.dir, MAIOR_PONT), 'w') as f:
             try:
@@ -31,27 +31,24 @@ class Jogo:
                 self.maior_pont = 0
 
     def new(self):
-
-        # Coomeça um novo jogo----------------------------------------------
+        plat = Platform(0,ALTURA - 40 , LARGURA , 100)
+        plat2 = Platform(20,ALTURA - 300  , 100 , 40)
+        # Coomeça um novo jogo
         self.fundo = pg.image.load(path.join(img_dir, 'fundo.png')).convert()
         self.fundo_ret = self.fundo.get_rect()
         self.score = 0
         self.all_sprites = pg.sprite.Group()
         self.plataformas = pg.sprite.Group()
-        #Cria o player----------------------
+        #Cria o player
         self.player = Player()
         self.all_sprites.add(self.player)
-        #Cria as plataformas-----------------
+        #Cria as plataformas
         for p in LISTA_PLATS:
-            p = Platform(self,*p)
+            p = Platform(*p)
             self.all_sprites.add(p)
             self.plataformas.add(p)
-
-        # Musiquinha -------------------------
         pg.mixer.music.load('bitsong.wav')
         pg.mixer.music.play(-1)
-
-
         self.run()
 
     def run(self):
@@ -64,17 +61,17 @@ class Jogo:
             self.draw()
 
     def update(self):
-        # Loop do jogo - Update----------------------------------------------
+        # Loop do jogo - Update
         self.all_sprites.update()
-        # Quando estiver subindo o player 'n encosta' na plataforma----------
+        # Quando estiver subindo o player 'n encosta' na plataforma
         if self.player.vel.y > 0:
             colisao = pg.sprite.spritecollide(self.player,self.plataformas,False)
-            #colisao na plataforma e  pulo automatico------------------------
+            #colisao na plataforma e  pulo automatico
             if colisao:
                 self.player.pos.y = colisao[0].rect.top
                 self.player.vel.y = 0
                 self.player.vel.y = -15
-        #Subir tela-------------------------------------------------
+        #Subir tela
         if self.player.rect.top <=  ALTURA/4:
             self.player.pos.y += abs(self.player.vel.y)
             for plat in self.plataformas:
@@ -92,17 +89,18 @@ class Jogo:
         if len(self.plataformas) == 0:
             self.playing = False
 
-        #Criando plataformas novas--------------------------------
+        #Criando plataformas novas
         while len(self.plataformas) < 6:
             largura = random.randrange(50, 100)
-            p = Platform(self,random.randrange(0, LARGURA-largura),
-                        random.randrange(-75, -30))
+            p = Platform(random.randrange(0, LARGURA-largura),
+                        random.randrange(-75, -30),
+                         largura, 20)
             self.plataformas.add(p)
             self.all_sprites.add(p)
 
 
     def events(self):
-        # Loop do jogo - eventos--------------
+        # Loop do jogo - eventos
         for event in pg.event.get():
             # checar se está fechando a janela
             if event.type == pg.QUIT:
@@ -111,17 +109,16 @@ class Jogo:
                 self.running = False
 
     def draw(self):
-        # Loop do jogo - desenho------------------------------------------
+        # Loop do jogo - desenho
         self.screen.fill(AZULCLARO)
         self.screen.blit(self.fundo, self.fundo_ret)
         self.all_sprites.draw(self.screen)
-        self.screen.blit(self.player.image, self.player.rect)
         self.draw_text(str(self.score), 40, BRANCO, LARGURA/2, 15)
-        # Depois de desenhar tudo, rodar o display----------------
+        # Depois de desenhar tudo, rodar o display
         pg.display.flip()
 
     def show_start_screen(self):
-        # tela de inicio------------------------------------------------
+        # tela de inicio
         self.screen.fill(AZULCLARO)
         self.fundo1 = pg.image.load(path.join(img_dir, 'fundo_inicio1.png')).convert()
         self.fundo1_ret = self.fundo1.get_rect()

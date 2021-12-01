@@ -19,8 +19,8 @@ class Player(pg.sprite.Sprite):
         self.image = pg.transform.scale(self.stand[0], (60, 60))
         self.image.set_colorkey(PRETO)
         self.rect = self.image.get_rect()
-        self.rect.center = (LARGURA / 2, ALTURA / 2)
-        self.pos = vec(LARGURA / 2, ALTURA / 2)
+        self.rect.center = (0, ALTURA - 40,)
+        self.pos = vec(0, ALTURA - 40,)
         self.vel = vec(0, 0)
         self.acc = vec(0, 0)
     #--------------------------------------------------------------------------------------------------------
@@ -99,14 +99,15 @@ class Player(pg.sprite.Sprite):
     
 
 class Platform(pg.sprite.Sprite):
-    def __init__( self,game,x,y ):
+    def __init__( self,x,y,l,h):
         #Plataformas
-        self.game = game
+        
         img_dir = path.join(path.dirname(__file__),'img')
         # Carregando as imagens
         pg.sprite.Sprite.__init__(self)
-        
-        self.image = pg.image.load(path.join(img_dir,"Nuvem.png")).convert()
+        nuvem = pg.image.load(path.join(img_dir,"Nuvem.png")).convert()
+        self.image = nuvem
+        self.image = pg.transform.scale (nuvem, (l, h))
         self.image.set_colorkey(PRETO)
         self.rect = self.image.get_rect()
         self.rect.x=x
