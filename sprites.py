@@ -68,7 +68,7 @@ class Player(pg.sprite.Sprite):
 
     #---------------------------------------------------------------------------------------------------
     def status(self):
-        if self.vel.y > 1 or self.vel.y < -1 :
+        if self.pos.y > 1 or self.pos.y < -1 :
             self.status = 'air'
         else:
             self.status = 'stand'
@@ -99,15 +99,14 @@ class Player(pg.sprite.Sprite):
     
 
 class Platform(pg.sprite.Sprite):
-    def __init__( self,x,y,l,h ):
+    def __init__( self,game,x,y ):
         #Plataformas
+        self.game = game
         img_dir = path.join(path.dirname(__file__),'img')
         # Carregando as imagens
-        palt = pg.image.load(path.join(img_dir,"Nuvem.png")).convert()
         pg.sprite.Sprite.__init__(self)
         
-        self.image = palt
-        self.image = pg.transform.scale(palt,(l, h*1.7))
+        self.image = pg.image.load(path.join(img_dir,"Nuvem.png")).convert()
         self.image.set_colorkey(PRETO)
         self.rect = self.image.get_rect()
         self.rect.x=x
