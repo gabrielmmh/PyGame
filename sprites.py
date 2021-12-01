@@ -23,6 +23,9 @@ class Player(pg.sprite.Sprite):
         self.pos = vec(0, ALTURA - 40,)
         self.vel = vec(0, 0)
         self.acc = vec(0, 0)
+        self.tempo = 0 
+        self.index_image = 0
+
     #--------------------------------------------------------------------------------------------------------
     def load_image(self):
         #personagem
@@ -42,7 +45,7 @@ class Player(pg.sprite.Sprite):
             a = pg.transform.scale(a,(60,60))
             a.set_colorkey(PRETO)
 
-        self.animation = {'stand':[self.stand], 'air':[self.air]}
+        self.animation = {'stand':self.stand, 'air':self.air}
     #---------------------------------------------------------------------------------------------------
     def update(self):
         #movimentacao com setas do teclado
@@ -65,7 +68,14 @@ class Player(pg.sprite.Sprite):
             self.pos.x = LARGURA
 
         self.rect.midbottom = self.pos
-
+        ''' self.status()
+        anime = self.animation[self.status]
+        if self.vel.y > 0:
+            
+            center = self.rect.center
+            self.image = anime[0]
+            self.rect = self.image.get_rect()
+            self.rect.center = center '''
     #---------------------------------------------------------------------------------------------------
     def status(self):
         if self.pos.y > 1 or self.pos.y < -1 :
@@ -107,7 +117,7 @@ class Platform(pg.sprite.Sprite):
         pg.sprite.Sprite.__init__(self)
         nuvem = pg.image.load(path.join(img_dir,"Nuvem.png")).convert()
         self.image = nuvem
-        self.image = pg.transform.scale (nuvem, (l, h))
+        self.image = pg.transform.scale (nuvem, (l+40, h*1.9))
         self.image.set_colorkey(PRETO)
         self.rect = self.image.get_rect()
         self.rect.x=x
