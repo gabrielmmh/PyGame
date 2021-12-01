@@ -86,6 +86,8 @@ class Jogo:
                 sprite.rect.y -= max(self.player.vel.y, 10)
                 if sprite.rect.bottom < 0:
                     sprite.kill()
+                    pg.mixer.music.load('foooong.wav')
+                    pg.mixer.music.play(-1)
         if len(self.plataformas) == 0:
             self.playing = False
 
