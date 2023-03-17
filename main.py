@@ -132,14 +132,28 @@ class Jogo:
         self.fundo4_ret = self.fundo4.get_rect()
         self.tela_inicio1 = [self.fundo1, self.fundo2, self.fundo3, self.fundo4]
         self.tela_inicio2 = [self.fundo1_ret, self.fundo2_ret, self.fundo3_ret, self.fundo4_ret]
-        '''i=1
-        while i <= len(self.tela_inicio1):
-            self.screen.blit(self.tela_inicio1[i], self.tela_inicio2[i]) '''  
         
-        self.screen.blit(self.fundo1, self.fundo1_ret)     
-        pg.display.flip()
-        self.esperando_clique()
-        pass
+        current_image = 0
+        next_image_time = pg.time.get_ticks() + 100
+        
+        esperando = True
+        while esperando:
+            self.clock.tick(FPS)
+            for event in pg.event.get():
+                # checar se está fechando a janela
+                if event.type == pg.QUIT:
+                    esperando = False
+                if event.type == pg.KEYUP:
+                    esperando = False
+            if pg.time.get_ticks() > next_image_time:
+                current_image = (current_image + 1) % len(self.tela_inicio1)
+                next_image_time = pg.time.get_ticks() + 100
+            self.screen.blit(self.tela_inicio1[current_image], self.tela_inicio2[current_image])
+            pg.display.flip()
+
+        # self.screen.blit(self.fundo1, self.fundo1_ret)     
+        # pg.display.flip()
+        # self.esperando_clique()
 
     def show_go_screen(self):
         # tela final

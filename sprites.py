@@ -20,7 +20,7 @@ class Player(pg.sprite.Sprite):
         self.image.set_colorkey(PRETO)
         self.rect = self.image.get_rect()
         self.rect.center = (0, ALTURA - 40,)
-        self.pos = vec(0, ALTURA - 40,)
+        self.pos = vec(LARGURA/2, ALTURA - 40,)
         self.vel = vec(0, 0)
         self.acc = vec(0, 0)
         self.tempo = 0 
