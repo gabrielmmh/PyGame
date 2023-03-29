@@ -48,6 +48,7 @@ class Jogo:
             self.all_sprites.add(p)
             self.plataformas.add(p)
         pg.mixer.music.load('bitsong.wav')
+        pg.mixer.music.set_volume(0.01)
         pg.mixer.music.play(-1)
         self.run()
 
